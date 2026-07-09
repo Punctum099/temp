@@ -1,0 +1,74 @@
+/**
+ * section-head 이미지 겹침 수정 v2
+ *
+ * v1(section-inner padding 이동)이 안 먹히는 이유:
+ * - 20260708 블록이 head-img를 text-wrap 다음 일반 흐름 블록으로 둠
+ * - margin-top: 1% 가 별도로 이미지를 밀어냄
+ * - page-menu-wrap 은 absolute(section-inner 기준)인데 이미지만 flow 로 내려감
+ * - 반응형에서 text-wrap padding-top 이 여전히 살아 있어 충돌
+ *
+ * 해결: head-img 를 section-inner 안에서 absolute 로 고정
+ */
+
+/* 1) section-inner — 탭 영역 확보, 상단 padding 제거 */
+#wrap:not(.main) .section-head .section-inner {
+    position: relative;
+    min-height: 76rem;
+    padding-bottom: 16.5rem;
+}
+
+/* 2) text-wrap — 여백은 여기만 */
+#wrap:not(.main) .section-head .text-wrap {
+    position: relative;
+    z-index: 2;
+    padding: 10% 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+/* 3) 20260708 head-img — flow 탈출, 하단 배너로 고정 */
+#wrap:not(.main) .brand-intro .section-head .head-img,
+#wrap:not(.main) .brand-ceo .section-head .head-img,
+#wrap:not(.main) .brand-value .section-head .head-img,
+#wrap:not(.main) .brand-history .section-head .head-img,
+#wrap:not(.main) .management-compliance .section-head .head-img,
+#wrap:not(.main) .management-consumer .section-head .head-img,
+#wrap:not(.main) .management-csr .section-head .head-img,
+#wrap:not(.main) .management-philosophy .section-head .head-img,
+#wrap:not(.main) .management-environmental .section-head .head-img,
+#wrap:not(.main) .management-ethical .section-head .head-img,
+#wrap:not(.main) .management-humanright .section-head .head-img,
+#wrap:not(.main) .management-supply-chain .section-head .head-img,
+#wrap:not(.main) .management-synthesis-report .section-head .head-img,
+#wrap:not(.main) .investment-finance .section-head .head-img,
+#wrap:not(.main) .investment-governance .section-head .head-img,
+#wrap:not(.main) .investment-ir .section-head .head-img,
+#wrap:not(.main) .investment-notice .section-head .head-img,
+#wrap:not(.main) .pr-center-contribution .section-head .head-img,
+#wrap:not(.main) .pr-center-detail .section-head .head-img,
+#wrap:not(.main) .pr-center-media .section-head .head-img,
+#wrap:not(.main) .pr-center-news .section-head .head-img {
+    position: absolute;
+    left: 0;
+    bottom: 16.5rem;
+    width: calc(50vw + 50%);
+    margin-top: 0;
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    font-size: 0;
+    z-index: 1;
+}
+
+/* 4) 반응형 — section-inner 가 아닌 text-wrap 만 조정 */
+@media screen and (max-width: 1200px) {
+    #wrap:not(.main) .section-head .text-wrap {
+        padding-top: 13%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #wrap:not(.main) .section-head .text-wrap {
+        padding-top: 10%;
+    }
+}
