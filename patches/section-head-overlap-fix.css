@@ -14,9 +14,10 @@
     min-height: 76rem;
 }
 
-/* 2) text-wrap — 세로 padding 제거 */
+/* 2) text-wrap — 세로 padding 제거, 제목~이미지 간격은 margin으로 */
 #wrap:not(.main) .section-head .text-wrap {
     padding: 0;
+    margin-bottom: 3%;
     display: flex;
     flex-wrap: wrap;
     gap: 3rem;
