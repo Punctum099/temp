@@ -1,0 +1,75 @@
+/**
+ * section-head 이미지 겹침 수정
+ * 적용: common.css 의 동일 구간을 아래 내용으로 교체
+ *
+ * 원인: padding 이 .text-wrap 에만 있어 .head-img 는 별도 흐름으로 밀림
+ * 조치: 세로 여백을 .section-inner 로 이동, head-img margin-top 제거
+ */
+
+/* 1) section-inner — 여백 담당 */
+#wrap:not(.main) .section-head .section-inner {
+    /*padding-right: 38rem;*/
+    padding: 10% 0 3%;
+    /*padding-bottom: 16.5rem;*/
+    min-height: 76rem;
+}
+
+/* 2) text-wrap — 세로 padding 제거 */
+#wrap:not(.main) .section-head .text-wrap {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+/* 3) 20260708 head-img — 상단 마진 제거 */
+#wrap:not(.main) .brand-intro .section-head .head-img,
+#wrap:not(.main) .brand-ceo .section-head .head-img,
+#wrap:not(.main) .brand-value .section-head .head-img,
+#wrap:not(.main) .brand-history .section-head .head-img,
+#wrap:not(.main) .management-compliance .section-head .head-img,
+#wrap:not(.main) .management-consumer .section-head .head-img,
+#wrap:not(.main) .management-csr .section-head .head-img,
+#wrap:not(.main) .management-philosophy .section-head .head-img,
+#wrap:not(.main) .management-environmental .section-head .head-img,
+#wrap:not(.main) .management-ethical .section-head .head-img,
+#wrap:not(.main) .management-humanright .section-head .head-img,
+#wrap:not(.main) .management-supply-chain .section-head .head-img,
+#wrap:not(.main) .management-synthesis-report .section-head .head-img,
+#wrap:not(.main) .investment-finance .section-head .head-img,
+#wrap:not(.main) .investment-governance .section-head .head-img,
+#wrap:not(.main) .investment-ir .section-head .head-img,
+#wrap:not(.main) .investment-notice .section-head .head-img,
+#wrap:not(.main) .pr-center-contribution .section-head .head-img,
+#wrap:not(.main) .pr-center-detail .section-head .head-img,
+#wrap:not(.main) .pr-center-media .section-head .head-img,
+#wrap:not(.main) .pr-center-news .section-head .head-img {
+    width: calc(50vw + 50%);
+    margin-top: 0;
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    font-size: 0;
+}
+
+/* 4) 반응형 — text-wrap 대신 section-inner */
+@media screen and (max-width: 1200px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 13%;
+        padding-bottom: 3%;
+    }
+
+    #wrap:not(.main) .section-head .text-wrap {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 10%;
+        padding-bottom: 3%;
+    }
+
+    #wrap:not(.main) .section-head .text-wrap {
+        padding: 0;
+    }
+}
