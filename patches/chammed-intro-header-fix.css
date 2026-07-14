@@ -1,0 +1,91 @@
+/**
+ * 동아참메드 — intro-header (회사소개) 헤더 이미지 수정
+ *
+ * 적용 위치: intro.css (또는 회사소개 페이지 전용 CSS)
+ * common.css_994e.txt 에는 section-head 규칙이 없음 → 별도 파일에 추가
+ *
+ * 다른 사이트(쏘시오/에코팩)와의 차이:
+ * - body 클래스: brand-history, management-* 가 아닌 main.intro
+ * - 섹션 클래스: intro-header (기존 패치 선택자에 미포함)
+ * - page-menu-wrap(탭) 없음 → 이미지만 제목 아래 배치
+ * - 이미지 마크업: img.pc-part/mo-part 없이 .head-img > .img > img
+ */
+
+/* 1) section-inner — 상단 여백 담당 (탭 없으므로 min-height 축소) */
+.intro-header .section-head .section-inner {
+    padding: 10% 0 0;
+    min-height: auto;
+    padding-bottom: 0;
+}
+
+/* 2) text-wrap — 제목/부제 flex, 세로 padding 제거 */
+.intro-header .section-head .text-wrap {
+    padding: 0;
+    margin-bottom: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.intro-header .section-head .main-title {
+    font-size: 7rem;
+    width: 52%;
+}
+
+.intro-header .section-head .sub-title {
+    display: block;
+    width: 60%;
+    padding-left: 3%;
+    color: #666;
+}
+
+/* 3) head-img — 제목 아래 풀폭 배너 */
+.intro-header .section-head .head-img {
+    width: calc(50vw + 50%);
+    margin-top: 0;
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    font-size: 0;
+}
+
+.intro-header .section-head .head-img .img,
+.intro-header .section-head .head-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 4) 반응형 */
+@media screen and (max-width: 1200px) {
+    .intro-header .section-head .section-inner {
+        padding-top: 13%;
+    }
+
+    .intro-header .section-head .main-title {
+        font-size: 5.6rem;
+        width: 52%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .intro-header .section-head .section-inner {
+        padding-top: 10%;
+    }
+
+    .intro-header .section-head .text-wrap {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .intro-header .section-head .main-title,
+    .intro-header .section-head .sub-title {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .intro-header .section-head .head-img {
+        width: 100%;
+        margin-right: 0;
+    }
+}
