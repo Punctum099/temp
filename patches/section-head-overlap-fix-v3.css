@@ -1,0 +1,115 @@
+/**
+ * section-head 목표 레이아웃 v3
+ * 제목/부제 → 이미지 → 탭 (세로 스택, 겹침 없음)
+ *
+ * HTML DOM 순서: text-wrap(제목,부제,탭) → head-img
+ * 목표 순서:     제목,부제 → head-img → 탭
+ * → section-inner grid + text-wrap display:contents 로 재배치
+ */
+
+/* 1) section-inner — grid 컨테이너 */
+#wrap:not(.main) .section-head .section-inner {
+    display: grid;
+    grid-template-columns: 37% 1fr;
+    column-gap: 3rem;
+    row-gap: 0;
+    padding: 10% 0 0;
+    min-height: auto;
+    padding-bottom: 0;
+    position: relative;
+}
+
+/* 2) text-wrap — 래퍼 해제, 자식만 grid 참여 */
+#wrap:not(.main) .section-head .text-wrap {
+    display: contents;
+    padding: 0;
+    position: static;
+    z-index: auto;
+}
+
+/* 3) 1행 — 제목 + 부제 */
+#wrap:not(.main) .section-head .main-title {
+    grid-column: 1;
+    grid-row: 1;
+    width: auto;
+}
+
+#wrap:not(.main) .section-head .line-cut {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+}
+
+#wrap:not(.main) .section-head .sub-title {
+    width: auto;
+    padding-left: 3%;
+}
+
+/* 4) 2행 — 이미지 (flow, absolute 제거) */
+#wrap:not(.main) .brand-intro .section-head .head-img,
+#wrap:not(.main) .brand-ceo .section-head .head-img,
+#wrap:not(.main) .brand-value .section-head .head-img,
+#wrap:not(.main) .brand-history .section-head .head-img,
+#wrap:not(.main) .management-compliance .section-head .head-img,
+#wrap:not(.main) .management-consumer .section-head .head-img,
+#wrap:not(.main) .management-csr .section-head .head-img,
+#wrap:not(.main) .management-philosophy .section-head .head-img,
+#wrap:not(.main) .management-environmental .section-head .head-img,
+#wrap:not(.main) .management-ethical .section-head .head-img,
+#wrap:not(.main) .management-humanright .section-head .head-img,
+#wrap:not(.main) .management-supply-chain .section-head .head-img,
+#wrap:not(.main) .management-synthesis-report .section-head .head-img,
+#wrap:not(.main) .investment-finance .section-head .head-img,
+#wrap:not(.main) .investment-governance .section-head .head-img,
+#wrap:not(.main) .investment-ir .section-head .head-img,
+#wrap:not(.main) .investment-notice .section-head .head-img,
+#wrap:not(.main) .pr-center-contribution .section-head .head-img,
+#wrap:not(.main) .pr-center-detail .section-head .head-img,
+#wrap:not(.main) .pr-center-media .section-head .head-img,
+#wrap:not(.main) .pr-center-news .section-head .head-img {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    position: static;
+    width: calc(50vw + 50%);
+    margin-top: 3rem;
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    font-size: 0;
+    z-index: auto;
+}
+
+/* 5) 3행 — 탭 (이미지 아래, absolute 제거) */
+#wrap:not(.main) .section-head .page-menu-wrap {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    position: static;
+    height: auto;
+    bottom: auto;
+    z-index: auto;
+    margin-top: 0;
+}
+
+#wrap:not(.main) .section-head .page-menu-list {
+    position: static;
+}
+
+/* 6) 반응형 — padding 은 section-inner 기준 */
+@media screen and (max-width: 1200px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 13%;
+    }
+
+    #wrap:not(.main) .section-head .text-wrap {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 10%;
+    }
+
+    #wrap:not(.main) .section-head .text-wrap {
+        padding: 0;
+    }
+}
