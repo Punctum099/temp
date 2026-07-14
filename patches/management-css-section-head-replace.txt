@@ -1,0 +1,13 @@
+management.css 상단(9~96행)을 아래로 교체하세요.
+기존 주석 처리된 .head-img absolute 블록(84~93행)은 삭제합니다.
+766px 미디어쿼리 안의 "#wrap:not(.main) .head-img { display: none }" 도 삭제합니다.
+
+=== 교체 대상 (삭제) ===
+#wrap:not(.main) .section-head .section-inner { padding-right: 38rem; height: ... }
+#wrap:not(.main) .section-head .text-wrap { padding-top: 13.88% }
+/*#wrap:not(.main) .head-img { position: absolute; ... }*/  ← 주석 블록 전체
+#wrap:not(.main) .head-img .img { width: 100% }
+@media 766px: #wrap:not(.main) .head-img { display: none }  ← 삭제
+
+=== 교체 내용 ===
+→ patches/chammed-section-head-common.css 전체 복사

@@ -1,0 +1,149 @@
+/**
+ * 동아참메드 — section-head 헤더 이미지 공통 수정
+ *
+ * 적용 위치: management.css 상단 section-head 블록(9~96행) 교체
+ *            또는 common.css 하단 추가 (management.css보다 뒤에 로드되면 common 우선)
+ *
+ * 대상 페이지 (공통):
+ *   - .intro-header (회사소개 등, 탭 없음)
+ *   - .management-* (사회책임경영, 탭 있음)
+ *   - 기타 #wrap:not(.main) .section-head 사용 상세 페이지 전체
+ *
+ * 원인 (management.css 기존):
+ *   - padding-right: 38rem → 오른쪽 이미지 공간만 비움
+ *   - .head-img absolute 주석 처리 → 이미지가 flow로 텍스트 아래 작게 표시
+ *   - height: 52.77vw 고정 → 레이아웃 깨짐
+ */
+
+/* ── 1) section-inner ── */
+#wrap:not(.main) .section-head .section-inner {
+    padding: 10% 0 16.5rem;
+    padding-right: 0;
+    min-height: auto;
+    height: auto;
+    max-height: none;
+}
+
+/* 탭 없는 페이지 (회사소개 intro-header 등) */
+#wrap:not(.main) .intro-header .section-head .section-inner {
+    padding-bottom: 0;
+}
+
+/* ── 2) text-wrap / 제목 / 부제 ── */
+#wrap:not(.main) .section-head .text-wrap {
+    padding: 0;
+    margin-bottom: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+#wrap:not(.main) .section-head .main-title {
+    font-size: 7rem;
+    color: var(--tclr1);
+    line-height: 1.2;
+    width: 52%;
+}
+
+#wrap:not(.main) .section-head .sub-title {
+    display: block;
+    width: 60%;
+    padding-left: 3%;
+    margin-top: 0;
+    color: #666;
+}
+
+/* ── 3) head-img — 제목 아래 풀폭 배너 (모든 상세 페이지 공통) ── */
+#wrap:not(.main) .section-head .head-img {
+    position: static;
+    width: calc(50vw + 50%);
+    margin-top: 0;
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+    font-size: 0;
+}
+
+#wrap:not(.main) .section-head .head-img .img,
+#wrap:not(.main) .section-head .head-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ── 4) 탭 (management 등) — 기존 absolute 유지 ── */
+#wrap:not(.main) .section-head .page-menu-wrap {
+    position: absolute;
+    height: 6.1rem;
+    bottom: 5.5555555556%;
+    z-index: 1001;
+}
+
+#wrap:not(.main) .section-head .page-menu-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top .4s cubic-bezier(0.2, 0.4, 0.9, 1);
+}
+
+/* ── 5) 반응형 ── */
+@media screen and (max-width: 1200px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 13%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #wrap:not(.main) .section-head .section-inner {
+        padding-top: 10%;
+    }
+
+    #wrap:not(.main) .section-head .main-title {
+        font-size: 5.6rem;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    /* ★ 기존 management.css 의 head-img { display:none } 제거 필수 */
+    #wrap:not(.main) .section-head .head-img {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #wrap:not(.main) .section-head .section-inner {
+        padding: 0 2rem 0 1.6rem;
+        padding-top: 10rem;
+        padding-bottom: 0;
+    }
+
+    #wrap:not(.main) .intro-header .section-head .section-inner {
+        padding-bottom: 0;
+    }
+
+    #wrap:not(.main) .section-head .text-wrap {
+        padding-top: 0;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #wrap:not(.main) .section-head .main-title {
+        font-size: 3.6rem;
+        width: 100%;
+    }
+
+    #wrap:not(.main) .section-head .sub-title {
+        font-size: 1.5rem;
+        width: 100%;
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    #wrap:not(.main) .section-head .page-menu-wrap {
+        position: relative;
+        margin-bottom: 2.8rem;
+        height: 4.2rem;
+        bottom: auto;
+    }
+}
