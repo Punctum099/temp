@@ -1899,19 +1899,11 @@ input {
     padding-left: 1.25rem;
     overflow: hidden;
   }
-  /* INSIDE: 모바일 1장씩 노출 (PEOPLE과 동일) */
+  /* INSIDE: 모바일 1장씩 노출 — opacity/display 숨김 제거(슬라이드 애니메이션 유지) */
   .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide {
-    opacity: 0;
     width: 100% !important;
     max-width: 100%;
     box-sizing: border-box;
-  }
-  .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide.swiper-slide-active {
-    opacity: 1;
-  }
-  .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide.swiper-slide-prev,
-  .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide.swiper-slide-next {
-    display: none;
   }
   .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide .col-type,
   .container.main .section.visual .main-swiper .swiper.main-slide .swiper-slide .row-type {
