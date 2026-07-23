@@ -44,3 +44,7 @@
 
 - `jsp/human_members.jsp` — 인권경영 (구성원 다양성)
 - `jsp/environmental.jsp` — 환경경영
+
+## 이미지
+
+- `images/info-security-org-chart.svg` — 소비중심경영 정보보호조직도 (`DA인포메이션` → `DAI` 수정)
