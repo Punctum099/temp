@@ -2387,21 +2387,22 @@
   }
 }
 
-/* 인권경영·환경경영 — 표 하단 주석(.text-5) 글씨 크기를 표 내부(.table-type-a)와 동일하게 */
-.management-humanright .esg-table .text-5,
-.management-humanright .plank-cont > .text-5,
-.management-environmental .esg-table .text-5,
-.management-environmental .plank-cont > .text-5 {
-  font-size: 1.6rem;
-  line-height: 1.75;
+/* 인권경영·환경경영 — 표 하단 주석(.text-5) 글씨 크기를 표 내부와 동일하게
+ * (기존 .humanrightcont/.environmentalcont 경유 셀렉터보다 우선 적용) */
+#wrap .management-humanright .humanrightcont .plank-cont p.text-5,
+#wrap .management-humanright .humanrightcont .esg-table p.text-5,
+#wrap .management-environmental .environmentalcont .plank-cont p.text-5,
+#wrap .management-environmental .environmentalcont .esg-table p.text-5 {
+  font-size: 1.8rem !important;
+  line-height: 1.75 !important;
   color: var(--basic);
 }
 
 @media screen and (max-width: 766px) {
-  .management-humanright .esg-table .text-5,
-  .management-humanright .plank-cont > .text-5,
-  .management-environmental .esg-table .text-5,
-  .management-environmental .plank-cont > .text-5 {
-    font-size: 1.4rem;
+  #wrap .management-humanright .humanrightcont .plank-cont p.text-5,
+  #wrap .management-humanright .humanrightcont .esg-table p.text-5,
+  #wrap .management-environmental .environmentalcont .plank-cont p.text-5,
+  #wrap .management-environmental .environmentalcont .esg-table p.text-5 {
+    font-size: 1.6rem !important;
   }
 }
