@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chammed.mng.cp.service.impl.CpMngMapper">
+
+    <sql id="cpExcelSearchWhere">
+        <where>
+            <if test="schKeyWord != null and schKeyWord != ''">
+                <choose>
+                    <when test="schCondition == 'TITLE'">
+                        AND CP_NAME LIKE CONCAT('%', #{schKeyWord}, '%')
+                    </when>
+                </choose>
+            </if>
+            <if test="cpGubun != null and cpGubun != ''">
+                AND CP_GUBUN = #{cpGubun}
+            </if>
+        </where>
+    </sql>
+
+  <!--
+    실사내용(cpStepSummary)은 CP_STEP 테이블의 응답을 요약한 값입니다.
+    기존 프로젝트의 테이블/컬럼명에 맞게 수정하세요.
+  -->
+    <select id="selectCpExcelList" parameterType="com.chammed.mng.cp.service.CpSearchVO"
+            resultType="com.chammed.mng.cp.service.CpVO">
+        SELECT
+            CP.CP_IDX AS cpIdx,
+            CP.CP_GUBUN AS cpGubun,
+            CP.CP_NAME AS cpName,
+            CP.CP_CHAMMED_USER AS cpChammedUser,
+            CP.CP_BIZNUM AS cpBiznum,
+            CP.CP_CEO AS cpCeo,
+            CP.CP_USER AS cpUser,
+            CP.CP_TEL AS cpTel,
+            CP.CP_EMAIL AS cpEmail,
+            DATE_FORMAT(CP.REG_DATE, '%Y-%m-%d %H:%i:%s') AS regDate,
+            (
+                SELECT GROUP_CONCAT(CONCAT(S.CPS_Y, ':', S.CPS_TEXT) ORDER BY S.CPS_Y SEPARATOR ' | ')
+                FROM CP_STEP S
+                WHERE S.CP_IDX = CP.CP_IDX
+            ) AS cpStepSummary
+        FROM CP CP
+        <include refid="cpExcelSearchWhere"/>
+        ORDER BY CP.REG_DATE DESC
+    </select>
+
+    <select id="selectCpExcelListByIds" parameterType="java.util.List"
+            resultType="com.chammed.mng.cp.service.CpVO">
+        SELECT
+            CP.CP_IDX AS cpIdx,
+            CP.CP_GUBUN AS cpGubun,
+            CP.CP_NAME AS cpName,
+            CP.CP_CHAMMED_USER AS cpChammedUser,
+            CP.CP_BIZNUM AS cpBiznum,
+            CP.CP_CEO AS cpCeo,
+            CP.CP_USER AS cpUser,
+            CP.CP_TEL AS cpTel,
+            CP.CP_EMAIL AS cpEmail,
+            DATE_FORMAT(CP.REG_DATE, '%Y-%m-%d %H:%i:%s') AS regDate,
+            (
+                SELECT GROUP_CONCAT(CONCAT(S.CPS_Y, ':', S.CPS_TEXT) ORDER BY S.CPS_Y SEPARATOR ' | ')
+                FROM CP_STEP S
+                WHERE S.CP_IDX = CP.CP_IDX
+            ) AS cpStepSummary
+        FROM CP CP
+        WHERE CP.CP_IDX IN
+        <foreach collection="list" item="cpIdx" open="(" separator="," close=")">
+            #{cpIdx}
+        </foreach>
+        ORDER BY CP.REG_DATE DESC
+    </select>
+
+</mapper>
